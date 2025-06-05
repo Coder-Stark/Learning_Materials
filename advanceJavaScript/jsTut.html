@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Advance JavaScript Tutorials</title>
+    <script>
+
+        //VAR LET CONST----------------------------------------
+        var a = 1;
+        var a = 2;                    //redeclaration allowed
+        a = 3;                        //reassign allowed
+        console.log(a);
+
+        let b = 1;
+        // let b = 2;                 //redeclaration NOT allowed
+        b = 3;                        //reassign allowed
+        console.log(b);
+
+        const c = 1;
+        // const c = 2;               //redeclaration NOT allowed
+        // c = 3;                    //reassign NOT allowed
+        console.log(c);
+
+
+        //TEMPLETE LATERALS (BACK TICK OPERATOR)---------------------
+        function name(user){
+            return `Hello ${user}`;
+        }
+        console.log(name("shivam"));
+
+
+        //ARROW FUNCTIONS---------------------------------------------
+        let newName = (user) => `Hello ${user}`;
+        console.log(newName("Kumar"));
+
+
+        //REST OPERATOR------------------------------------------------
+        function sum(name, course, ...args){
+            console.log(arguments);
+
+            let sum = 0;
+            for(let i in args){
+                sum += args[i];
+            }
+            return `Score of ${name} is ${sum}`;
+        }
+        console.log(sum("Shivam", "BTech", 10, 20, 30));
+        console.log(sum("Kumar", "BA", 10, 20, 30, 50, -10));
+        
+        
+        //SPREAD OPERATOR------------------------------------------------
+        function sum2(name, course, ...args){
+            console.log(arguments);
+            let sum2 = 0;
+            for(let i in args){
+                sum += args[i];
+            }
+            return `Score of ${name} is ${sum}`;
+        }
+        var arr1 = [10, 20, 30];
+        var arr2 = [10, 20, 30, 50, -10];
+        console.log(sum("Shivam", "BTech", ...arr1));            //spread operator in calling function
+        console.log(sum("Kumar", "BA", ...arr2));       //score of Kumar is 100
+
+        //simple use case 1
+        var arr3 = [10, 20, 30, 40];
+        console.log(...arr3);                           //10 20 30 40           simple output without array
+        console.log([...arr3]);                         //(4)[10, 20, 30, 40]   converted into array
+        
+        //simple use case 2   (not creating copy)
+        var arr4 = [10, 20, 30, 40, 50];
+        var arr5 = arr4;
+        var arr6 = [...arr4];                           //not create exact copy if after push ele
+        arr4.push(60);
+        console.log(arr4);
+        console.log(arr5);                              //(6)[10, 20, 30, 40, 50, 60]
+        console.log(arr6);                              //(5)[10, 20, 30, 40, 50] 60 not pushed here (diff from arr5)
+
+        //simple use case 3  (merge in array)
+        var arr7 = [1, 2, 3];
+        var arr8 = [4, 5];
+        var arr9 = arr7.concat(arr8);
+        var arr10 = [...arr7, ...arr8];                 //merge without .concat (using spread operator)       
+        console.log(arr9);
+        console.log(arr10);
+
+        //simple use case 4 (merge in objects)
+        var obj1 = {
+            name: "Shivam Kumar"
+        };
+        var obj2 = {
+            age: 23
+        };
+        var obj3 = {...obj1, ...obj2};       
+        console.log(obj3);                     //{name: 'Shivam Kumar', age: 23}
+
+
+        //OBJECT LITERALS------------------------------------------------
+        //old version
+        var name = "Rajbhar";
+        var course = "college";
+        
+        var obj4 = {
+            name : name,
+            course: course
+        }
+        console.log(obj4);                     //{name: 'Rajbhar', course: 'college'}
+
+        //new version (es6)                    //no need to reassign if same name
+        var obj5 = {
+            name,
+            course
+        }
+        console.log(obj5);                     //{name: 'Rajbhar', course: 'college'}
+
+        let n = "name";
+        var obj6 = {
+            [n]: "Aditya",
+            course: "Btech"
+        };
+        console.log(obj6);                     //{name: 'Aditya', course: 'Btech'}
+        console.log(obj6.name);                //Aditya
+        console.log(obj6.course);              //Btech
+        
+        var obj7 = {
+            [n + "name"]: "Aditya",
+            course: "Btech"
+        };
+        console.log(obj7);                     //{namename: 'Aditya', course: 'Btech'}
+
+        //use function in obj
+        //old version
+        let obj8  = {
+            name: "Vikas",
+            show: function(){
+                return this.name;
+            }
+        };
+        console.log(obj8.show());             //Vikas
+
+        //new version
+        let obj9 = {
+            name: "Vikas",
+            show(){
+                return this.name
+            }
+        }
+        console.log(obj9.show());             //Vikas
+        console.log(obj9['show']());          //Vikas
+
+        //returning object in a function
+        var name = "Satyam";
+        var course = "Graphic Design";
+
+        function student1(name, course){
+            return {name, course};
+        }
+        console.log(student1(name, course));   //{name: 'Satyam', course: 'Graphic Design'}
+
+        var fname = "Satyam";
+        var lname = "Gupta";
+        var course = "Graphic Design";
+
+        function student(fname, lname, course){
+            let fullName = fname + " " + lname;
+            return {fullName, course};
+        }
+        let s = student(fname, lname, course);   //making obj
+        console.log(s.fullName);                 //Satyam Gupta
+
+
+        //DESTRUCTURING ARRAY---------------------------------------------------
+        var user = ["Shivam Kumar", 23, ["Male", "1lac"]];
+
+        //old version                             //create new var each time
+        var name = user[0];
+        var age  = user[1];
+        console.log(`name : ${name} and age: ${age}`);  //name : Shivam Kumar and age: 23
+        
+        //new version
+        var [name, age] = user;
+        console.log(`name : ${name} and age: ${age}`);  //name : Shivam Kumar and age: 23
+        
+        var [name, age, val=10] = user;          //can be default value
+        console.log(`name : ${name} and age: ${age} and value : ${val}`);  //name : Shivam Kumar and age: 23 and value : Male,1lac
+        
+        var [name, age, [gender, salary]] = user;          //can be used nested array as well
+        console.log(`name : ${name} and age: ${age} and value : ${val} with gender: ${gender} with Salary : ${salary}`); //name : Shivam Kumar and age: 23 and value : Male,1lac with gender: Male with Salary : 1lac
+
+        //with functions
+        function users([name, age = 20, city]){
+            console.log(`name : ${name}, age : ${age}, city : ${city}`);
+        }
+        users(["Aditya", 22, "Delhi"]);                      //name : Aditya, age : 22, city : Delhi
+        
+        function users2(){
+            return ["Aditya", 22, "Delhi"];
+        }
+        var [name, age, city] = users2();
+        console.log(`name : ${name}, age : ${age}, city : ${city}`);     //name : Aditya, age : 22, city : Delhi
+
+
+        //DESTRUCTURING OBJECTS-----------------------------------------------------------------
+        var user = {
+            name: "Vikas",
+            age: 23,
+            city: "Delhi"
+        };
+        var {name, age, city} = user;
+        console.log(`name: ${name}, age: ${age}, city: ${city}`);        //name: Vikas, age: 23, city: Delhi
+        
+        var {name: na, age: ag, city: ci} = user;            //take alice names(shortcuts)
+        console.log(`name: ${na}, age: ${ag}, city: ${ci}`);             //name: Vikas, age: 23, city: Delhi
+        
+
+        //OOPS INTRODUCTION----------------------------------------------------------------------
+        // class -> blueprint              (map of home)
+        // objects-> instance of class     (homes made using maps)
+        //properties-> let a, b;
+        //menthods -> sum(){a + b};       types - constructor, prototype, static
+
+        class hello{
+            message(){                            //methods
+                console.log("Hello EveryOne");
+            }
+            sorry(){
+                console.log("Sorry EveryOne");
+            }
+        }        
+        var a  = new hello();
+        a.message();                              //Hello EveryOne
+        a.sorry();                                //Sorry EveryOne
+
+        //types of methods
+        //constructor
+        class students{
+            constructor(){
+                console.log("Constructor Calls on build objects (without calling)");
+            }
+        }
+        var a = new students();                   //Constructor Calls on build objects (without calling)
+        
+        //prototype
+        class student2{
+            constructor(){
+                let name;
+                console.log("Constructor Calls on build objects (without calling), prototype");
+            }
+            hello(){                              //prototype method
+                console.log("Hello " + this.name);
+            }
+        }
+        var a = new student2();                  //Constructor Calls on build objects (without calling), prototype
+        a.name = "Shivam";
+        a.hello();                               //Hello Shivam
+        
+        //another way of above
+        class student22{
+            constructor(name, age){
+                this.name = name;               //use this
+                this.age = age;
+                console.log("Constructor Calls on build objects (without calling), prototype");
+            }
+            hello(){                            //prototype method
+                console.log(`Hello ${this.name} with ${this.age}`);
+            }
+        }
+        var a = new student22("Shivam", 23);         //Constructor Calls on build objects (without calling), prototype
+        // a.name = "Shivam";                    //no need of this now
+        a.hello();                               //Hello Shivam with 23
+        
+        //static method
+        class student3{
+            static staticMethod(){
+                console.log("Static Method Calls")
+            }
+        }
+        //name of class . function name
+        student3.staticMethod();                 //Static Method Calls
+                     
+
+        //INHERITANCE-----------------------------------------------------------------------
+        class employee{
+            constructor(name){
+                console.log(`Constructor of Employee calls ${name}`)
+            }
+        };
+        class manager extends employee{
+            constructor(name){
+                super();                        //if not then gives error
+                console.log(`Constructor of Manager calls ${name}`)
+            }
+            
+        }
+        var a = new manager("Kallo");            //Constructor of Employee calls undefined, Constructor of Manager calls Kallo
+        
+        //another example
+        class employeee{
+            constructor(name){
+                this.empName = name;
+                console.log(`Constructor of Employee calls ${name}`)
+            }
+            info(){
+                console.log(`Employeee Name : ${this.empName}`)
+            }
+        };
+        class managers extends employeee{
+            info(){
+                super.info();
+                console.log(`Managers Name : ${this.empName}`)
+            }
+        }
+        var a = new managers("Satyam");            //Constructor of Employee calls Satyam
+        a.info();                                  //Employeee Name : Satyam , Managers Name : Satyam
+
+        //real life example
+        class empl{
+            constructor(name, age, salary){
+                this.name = name,
+                this.age = age,
+                this.salary = salary;
+
+                console.log("Constructor of empl");
+            }
+            info(){
+                document.write(`<h3>Employee Class </h3>
+                                Name: ${this.name}<br>
+                                Age : ${this.age} <br>
+                                Salary: ${this.salary}`)
+            }
+        }
+
+        class mng extends empl{
+            info(){
+                let travel = 1000;
+                let persnl = 2000;
+                let phone = 3000;
+                let totalSalary = this.salary + travel + persnl + phone;
+                //creates table of manager instead of empl with updation in salary
+                document.write(`<h3>Manager Class </h3>                    
+                                Name: ${this.name}<br>
+                                Age : ${this.age} <br>
+                                Salary: ${totalSalary}`)
+            }
+        }
+        var e = new empl("Aditya", 22, 10000);         //Constructor of empl
+        e.info();                                      //shows employee table with no increment
+        var m = new mng ("Vikas", 23, 20000);
+        m.info();                                      //shows manager table with increment in salary.
+
+
+        //MODULES-------------------------------------------------------------------------------------
+        /*
+        export file using export
+        import file using import
+
+        //SEE MODULE FOLDER******************
+
+//         //PROMISE--------------------------------------------------------------
+//         //promise states - Pending, Fulfilled, Rejected
+
+//         /* 
+//                     Promise()
+//                     /      \
+//                 resolve()  reject()
+//                     |        |
+//                 then()     catch()           -> call back functions
+//         */
+
+//         var complete = true;
+//         var prom = new Promise(function(resolve, reject){
+//             if(complete){
+//                 resolve("Successful");
+//             }else{
+//                 reject("Failed");
+//             }
+//         });
+//         console.log(prom);                      //Promise {<fulfilled>: 'Successful'}
+
+//         //in functions
+//         function promi(complete){
+//             return new Promise(function(resolve, reject){
+//                 if(complete){
+//                     resolve("Successful");
+//                 }else{
+//                     reject("Failed");
+//                 }
+//             })
+//         }
+//         console.log(promi(true));              //Promise {<fulfilled>: 'Successful'}
+
+//         //using then or catch and pending state(using set timeout)
+//         function promi(complete){
+//             return new Promise(function(resolve, reject){
+//                 console.log("Pending State, Data is Fetching")
+//                 setTimeout(() => {
+//                     if(complete){
+//                         resolve("Successful");
+//                     }else{
+//                         reject("I am Failed");
+//                     }
+//                 }, 2000);
+//             })
+//         }
+//         var onfulfillment = (result) => {
+//             console.log(result);
+//         }
+//         var onRejection = (error) => {
+//             console.log(error);
+//         }
+
+//         promi(false).then(onfulfillment).catch(onRejection);       //Pending State, Data is Fetching, Successful  (OR)     //Pending State, Data is Fetching, Failed
+        
+//         //alternative way
+//         function promi(complete){
+//             return new Promise(function(resolve, reject){
+//                 console.log("Pending State, Data is Fetching")
+//                 setTimeout(() => {
+//                     if(complete){
+//                         resolve("I am Successful");
+//                     }else{
+//                         reject("I am Failed");
+//                     }
+//                 }, 2000);
+//             })
+//         }
+
+//         promi(true).then((result) => {
+//             console.log(result);                  //Pending State, Data is Fetching, I am Successful 
+//         }).catch((error) => {
+//             console.log(error);                   //Pending State, Data is Fetching, I am failed
+//         });           
+        
+//         //another example (division)
+//         function proms(a, b){
+//             return new Promise(function(resolve, reject){
+//                 console.log("Calculating......")
+//                 var c = a / b;
+//                 setTimeout(() => {
+//                     if(a, b){
+//                         resolve(`answer : ${c}`);
+//                     }else{
+//                         reject(`Fail to Calculate`);
+//                     }
+//                 }, 2000);
+//             })
+//         }
+
+//         proms(10, 0).then((result) => {                     //Calculating....., answer 5
+//             console.log(result);
+//         }).catch((error) => {
+//             console.log(error);                              //if(denom - 0) Fail to Calculate
+//         });
+
+
+//         //PROMISE.ALL()-------------------------------------------------------------------------------
+
+//         /*
+//             Promise()   Promise()   Promise()
+//                 \          |         /
+//                    \       |       /
+//                      Promise().all()
+//                         /      \
+//                     resolve()  reject()
+//  //if all resolved    |        |             //if any one is fails
+//                     then()     catch()  
+            
+//         */
+
+//         var p1 = new Promise((resolve, reject)=>{
+//             setTimeout(() => {
+//                 console.log("First Promise resolved");
+//                 resolve(10);
+//             }, 1000);
+//         })
+//         var p2 = new Promise((resolve, reject)=>{
+//             setTimeout(() => {
+//                 console.log("Second Promise resolved");
+//                 resolve(20);
+//             }, 2000);
+//         })
+//         var p3 = new Promise((resolve, reject)=>{
+//             setTimeout(() => {
+//                 console.log("Third Promise resolved");
+//                 resolve(30);
+//             }, 3000);
+//         })
+
+//         Promise.all([p1, p2, p3]).then((result)=>{
+//             console.log(`Result : ${result}`);
+//         }).catch((error)=>{
+//             console.log(`Error : ${error}`);
+//         });
+
+//         /*
+//         output
+//         First Promise resolved (after 1 sec)
+//         Second Promise resolved (after 2 sec)
+//         Third Promise resolved (after 3 sec)
+//         Result: 10, 20, 30
+//         */
+
+//         //another way of writing (concise)
+//         var promiseCall = function(returnData, message){
+//             return function(resolve, reject){
+//                 setTimeout(() => {
+//                     console.log(`The ${message} promise has resolved`);
+//                     resolve(returnData);
+//                 }, returnData * 100);
+//             }
+//         }
+//         var p1 = new Promise(promiseCall(10, "First call"));
+//         var p2 = new Promise(promiseCall(20, "Second call"));
+//         var p3 = new Promise(promiseCall(30, "Third call"));
+
+//         var total = 0;
+//         Promise.all([p1, p2, p3]).then((result)=>{
+//             for(let i in result){
+//                 total += result[i];
+//             }
+//             console.log(`Results : ${result}`);
+//             console.log(`Total : ${total}`);
+//         }).catch((error)=>{
+//             console.log(`Error : ${error}`);
+//         })
+
+//         /*output
+//         The First call promise has resolved (after 1 sec)
+//         The Third call promise has resolved (after 2 sec)
+//         The Second call promise has resolved (after 3 sec)
+//         Results : 10, 20, 30
+//         Total : 60
+//         */
+
+
+//         //AJAX--------------------------------------------------------------------------
+//         /*
+//         Asynchronous Javascript And XML
+//         It is a technique for creating fast and dynamic web pages
+//         Using XMLHttpRequest in 5 steps (readyState)
+//         0 -> request not initialized
+//         1 -> server connection established
+//         2 -> request received
+//         3 -> processing request
+//         4 -> request finished and response is ready
+
+//         Response in 2 ways
+//         Status           (200 - OK, 403 - Forbidden, 404 - Not Found)
+//         responseText or responseXML
+//         */
+
+//         //SEE AJAX FOLDER******************************
+
+
+//         //FETCH()---------------------------------------------------------------------------------------------------------------------------
+//         //alternative of AJAX (simple code)
+
+//         //SEE FETCH FOLDER*****************************
+
+//         //ASYNC AND AWAIT-------------------------------------------------------------------------------
+//         /*
+//         async functions always return promise (resolve[then] or reject[catch])
+//         no need to write resolve and reject
+//         */
+
+        //normal function
+        function test(){
+            return "Hello";
+        }
+        console.log(test());                           //Hello
+
+        //async function
+        async function test() {
+            return "Hello";
+        }
+        console.log(test());                           //Promise {<fulfilled>: 'Hello'}
+            
+        //we can use .then and .catch with async
+        async function test() {
+            return "Hello";
+        }
+        test().then((result)=>{
+            console.log(result);                       //Hello
+        })
+
+        //another way of writing async function
+        let tests = async function (){
+            return 'Hello';
+        }
+        tests().then((result)=>{
+            console.log(result);                       //Hello
+        })
+
+        //async using arrow function
+        let tests1 = async () =>  "Hello";
+        tests1().then((result) =>{
+            console.log(result);                       //Hello
+        });
+
+        //await method (front of await line execute first then its next line [in that scope only])
+        async function tests2() {
+            console.log("2: Message");
+            console.log("3: Message");
+            console.log("4: Message");
+        }
+        console.log("1: Message");
+        tests2();
+        console.log("5: Message");
+        //print = 1.. 2.. 3.. 4.. 5..
+        
+        async function tests2() {
+            console.log("2: Message");
+            await console.log("3: Message");
+            console.log("4: Message");
+        }
+        console.log("1: Message");
+        tests2();
+        console.log("5: Message");
+        //print = 1.. 2.. 3.. 5.. 4..
+
+        //SEE ASYNC_AWAIT FOLDER****************************************
+
+
+        //SYMBOL(new DataType)----------------------------------------------------------------------------------------------
+        //use to use unique values
+        let id = Symbol();
+        console.log(id);                    //Symbol()
+
+        let id1 = Symbol("Hello");
+        console.log(id1);                   //Symbol(Hello)
+        console.log(typeof id1);            //symbol
+
+        //need of symbol (same value but still different)
+        let ids1 = Symbol("Hello");
+        let ids2 = Symbol("Hello");
+        console.log(ids1 === ids2);          //false
+        
+        let idstr1 = "Hello";
+        let idstr2 = "Hello";
+        console.log(idstr1 === idstr2);      //true
+
+        //cant be use symbol as string by default(javascript)
+        let sy = Symbol("hello world");
+        console.log(sy);
+        // alert(sy);                           //error
+        ////alert(sy.toString())                    //shows alert [Symbol(hello)]
+        //print values using .description
+        console.log(sy.description);            //hello world
+
+        //symbol in objects
+        let agee = Symbol();
+        let user1 = {
+            name: "Shivam Kumar",
+            class: "BTech",
+            [agee] : 23                         //first square bracket then same
+        }
+
+        console.log(`user name : ${user1.name}, class : ${user1.class}, age : ${user1[agee]}`);   //not using (.)
+        //output user name : Shivam Kumar, class : BTech, age : 23
+
+        //symbol cant be use in for in loop
+        //symbol skip in json fetching or creating
+
+        console.log(user1);                    //{name: 'Shivam Kumar', class: 'BTech', Symbol(): 23}
+        console.log(JSON.stringify(user1));    //{"name":"Shivam Kumar","class":"BTech"}      //skip symbol in json
+
+
+        //ITERATORS---------------------------------------------------------------------------------------------------
+        //general
+        let numbers = [10, 20, 30];
+        console.log(numbers);                   //(3) [10, 20, 30]
+        
+        //using iterators
+        console.log(typeof numbers[Symbol.iterator]);   //function
+
+        let iter = numbers[Symbol.iterator]();
+        console.log(iter.next());                       //{value: 10, done: false}   //done -> true if full traversed
+        console.log(iter.next());                       //{value: 20, done: false}   //done -> true if full traversed
+        console.log(iter.next());                       //{value: 30, done: false}   //done -> true if full traversed
+        console.log(iter.next());                       //{value: undefined, done: true}   //done -> true if full traversed
+
+        //skipping value
+        let iter2 = numbers[Symbol.iterator]();
+        iter2.next();                                   //skipping value (1st value 10 is skipped)
+        console.log(iter2.next());                      //{value: 20, done: false}
+        console.log(iter2.next());                      //{value: 30, done: false}
+        console.log(iter2.next());                      //{value: undefined, done: true}
+
+        //print direct value
+        let iter3 = numbers[Symbol.iterator]();
+        console.log(iter3.next().value);                //10
+        console.log(iter3.next().value);                //20
+        console.log(iter3.next().value);                //30
+        console.log(iter3.next().value);                //undefined
+        console.log(iter3.next().done);                 //true
+
+        //use in string (simpler way)
+        let str = "Shivam Kumar";
+        for(let char of str){
+            console.log(char);                          //S h i v a m  k u m a r
+        }
+
+        //using loop with iterator
+        let iter4 = numbers[Symbol.iterator]();
+        let it = iter4.next();
+        while(!it.done){
+            console.log(it.value);                      //10 20 30
+            it = iter4.next();
+        }
+        
+
+        //GENERATORS----------------------------------------------------------------------------
+        //to control iterations or work in a function
+        //normal function
+        function generate(){
+            console.log("First");
+            console.log("Second");
+        }
+        generate();                                     //First ; Second
+
+        //generator function
+        function *generateIt(){
+            console.log("First");
+            console.log("Second");
+        }
+        let g = generateIt();
+        console.log(g.next());                           //First ; Second ; {value: undefined, done: true}
+        
+        //use of yield
+        function *generateIt1(){
+            console.log("First");
+            yield 'Pause 1';
+            console.log("Second");
+            yield 'Pause 2';
+        }
+        let gn = generateIt1();
+        console.log(gn.next());                          //First ; {value: 'Pause 1', done: false}                      //First ; Second ; {value: undefined, done: true}
+        // console.log(gn.next().value)                     //Pause 2
+        console.log(gn.next());                          //Second ; {value: 'Pause 2', done: false}                      //First ; Second ; {value: undefined, done: true}
+        console.log(gn.next());                          // ; {value: undefined, done: true}                      //First ; Second ; {value: undefined, done: true}
+
+        //using for of loop with generators
+        function *gen(){
+            yield 'Pause 1';
+            yield 'Pause 2';
+            yield 'Pause 3';
+        }
+        let gnr = gen();
+        for(let it of gnr){
+            console.log(it);                            //Pause 1 ; Pause 2; Pause 3
+        }
+        
+
+        //STRICT MODE-----------------------------------------------------------------------------------------
+        //use to not avoid basic syntax errors like (without declaration use - a = 10; console.log(a))
+        // "use strict";                  //at the top of codes (<script>"use strict" --- </scrip>) or anywhere above codes
+        l = 10;
+        console.log(l);
+
+        //duplicate parameters also not allowed
+        function dup(a, b, b){                //Uncaught SyntaxError: Duplicate parameter name not allowed in this context
+            console.log(a + b + b);
+        }
+        dup(10, 20, 30);                      //70 (but right is 60(no error in console))
+        
+        "use strict";
+        function dup(a, b, b){                //Uncaught SyntaxError: Duplicate parameter name not allowed in this context
+            console.log(a + b + b);
+        }
+        dup(10, 20, 30);
+
+
+        //ERROR HANDLING-------------------------------------------------
+        try{
+            console.log("Start of Try");               //Start of Try
+            blbla;
+            console.log("End of Try");                 //not call cause of error
+        }catch{
+            console.log("Error handled by Catch");     //Error handle by Catch
+        }
+
+        //find specific line of error and type of error
+        try{
+            console.log("Start of Try");               //Start of Try
+            blbla;
+            console.log("End of Try");                 //not call cause of error
+        }catch(err){
+            console.log(`Error : ${err}`);             //Error : ReferenceError: blbla is not defined (25)
+        }
+        
+        //try catch is synchronous (so not work outside setTimeout or setInterval [can work inside of it])
+        /*
+        try{
+            console.log('Trying');
+            setTimeout(() => {
+                blabla;                                
+                }, 1000);
+                }catch(err){
+                    console.log(`Error : ${err}`);
+        }
+        //output : //throws an error not handled by catch
+        */
+       
+        //we can use like this
+        setTimeout(() => {
+            try{
+                console.log('Trying');
+            }catch(err){
+                console.log(`Error : ${err}`);
+            }
+        }, 1000);
+        //output: Trying
+        
+        //seperate error-name, message, stack
+        try{
+            console.log("Start of Try");               //Start of Try
+            blbla;
+            console.log("End of Try");                 //not call cause of error
+        }catch(err){
+            console.log(`Error : ${err.name}`);             //only name of error
+            console.log(`Error : ${err.message}`);          //only message
+            console.log(`Error : ${err.stack}`);            //full error
+        }
+        //output
+        /*
+        Error : ReferenceError
+        test.html:58 Error : blbla is not defined
+        test.html:59 Error : ReferenceError: blbla is not defined at test.html:54:13
+        */
+
+        /*
+        Types of Error in JavaScript
+        1. EvalError       ->    When We use Eval functions
+        2. RangeError      ->    type error where we use range
+        3. ReferenceError  ->    variable or func which is undefine
+        4. SyntaxError     ->    syntax errors
+        5. TypeError       ->    int, float... rather then this
+        6. URIError        ->    Parameter is wrong or type of parameter pass is wrong
+        7. AggregateError  ->    promise.all() here aggregate errors
+        */
+
+        //General use of try catch in api fetching data loading
+        try{
+            let json = `{
+                "name": "Shivam Kumar",
+                "age" : 23
+            }`;
+            let user = JSON.parse(json);       //converts json data format to javascript object (fetch data from server to javascript objects)
+            // let user = JSON.stringify(json);       //converts javascript objects data format to json format (send javascript objects data to server)
+            console.log(user.name);                   //Shivam Kumar
+            console.log(user.age);                    //23
+        }catch(err){
+            console.log(`Error : ${err}`);
+        }
+
+        //using throw
+        try{
+            let json = `{
+                "age" : 23
+            }`;
+            let user = JSON.parse(json);       //converts json data format to javascript object (fetch data from server to javascript objects)
+            if(!user.name){
+                throw new Error("Incomplete Data");
+            }
+            // let user = JSON.stringify(json);       //converts javascript objects data format to json format (send javascript objects data to server)
+            console.log(user.name);                   //Shivam Kumar
+            console.log(user.age);                    //23
+        }catch(err){
+            console.log(`Error : ${err}`);
+        }
+        //output : Error : Error: Incomplete Data
+
+        //use finally
+        try{
+            let json = `{
+                "age" : 23
+            }`;
+            let user = JSON.parse(json);       //converts json data format to javascript object (fetch data from server to javascript objects)
+            if(!user.name){
+                throw new Error("Incomplete Data");
+            }
+            // let user = JSON.stringify(json);       //converts javascript objects data format to json format (send javascript objects data to server)
+            console.log(user.name);                   //Shivam Kumar
+            console.log(user.age);                    //23
+        }catch(err){
+            console.log(`Error : ${err}`);
+        }finally{
+            console.log('Finally');              //Finally (work all time either error occur or not)
+        }
+    </script>
+</head>
+<body>
+    <h1>Advance JavaScript Tutorials</h1>
+</body>
+</html>

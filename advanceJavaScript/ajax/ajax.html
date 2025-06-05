@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJAX</title>
+</head>
+<body>
+    <p id="demo">Here We load data</p>
+    <button onclick="loadData()">Click Here</button>
+    <script>
+        function loadData(){
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function(){
+                if(this.readyState == 4 && this.status == 200){
+                    //console.log(this.responseText);          //This is the content of readme file
+                    document.getElementById('demo').innerHTML = this.responseText;      //content of p is change
+                }
+            }
+            // xhttp.open('GET', "./readme.txt", true);          //true = asynchronous, false = synchnronous
+            xhttp.open('GET', "https://jsonplaceholder.typicode.com/posts", true);      //fake api call content of json shows on browser or console
+            xhttp.send();
+        }
+    </script>
+</body>
+</html>

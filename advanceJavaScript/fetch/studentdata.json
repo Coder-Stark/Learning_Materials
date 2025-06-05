@@ -1,0 +1,17 @@
+[
+    {
+        "name": "Shivam Kumar",
+        "age" : "23",
+        "city": "Delhi"
+    },
+    {
+        "name": "Aditya Mishra",
+        "age" : "22",
+        "city": "Gonda"
+    },
+    {
+        "name": "Vikas Kumar",
+        "age" : "23",
+        "city": "UP"
+    }
+]

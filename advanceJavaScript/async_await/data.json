@@ -1,0 +1,17 @@
+[
+    {
+        "name": "Sumit Rajput",
+        "age" : "23",
+        "city": "Delhi"
+    },
+    {
+        "name": "Lalit Mishra",
+        "age" : "22",
+        "city": "Gonda"
+    },
+    {
+        "name": "Namit Kumar",
+        "age" : "23",
+        "city": "UP"
+    }
+]

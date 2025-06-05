@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Async & Await</title>
+</head>
+<body>
+    <script>
+        async function asaw() {
+            console.log("2: Message");
+            const res = await fetch('./data.json');
+            console.log("3: Message")
+            const data = await res.json();
+
+            return data;
+        }
+        console.log("1: Message");
+        let v = asaw();
+        console.log("4: Message");
+        console.log(v);
+        //print : 1... 2... 4... promise{} 3...
+        
+        //real world code
+        async function f() {
+            const res = await fetch('./data.json');
+            const data = await res.json();
+            return data;
+        }
+        let s = f();
+        console.log(s);                                  //Promise {<pending>, result array(3)}
+        
+        //using .then with async await
+        async function fa() {
+            const res = await fetch('./data.json');
+            const data = await res.json();
+            return data;
+        }
+        fa()
+        .then((res)=> console.log(res))            //(3) [{…}, {…}, {…}]
+        .catch((err)=> console.log(err))
+        
+        //concise version of above
+        async function fa() {
+            return (await fetch('./data.json')).json();
+        }
+        fa()
+        .then((res)=> console.log(res))            //(3) [{…}, {…}, {…}]
+        .catch((err)=> console.log(err))
+    </script>
+</body>
+</html>
