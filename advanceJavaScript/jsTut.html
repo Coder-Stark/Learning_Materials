@@ -355,212 +355,212 @@
 
         //SEE MODULE FOLDER******************
 
-//         //PROMISE--------------------------------------------------------------
-//         //promise states - Pending, Fulfilled, Rejected
+        //PROMISE--------------------------------------------------------------
+        //promise states - Pending, Fulfilled, Rejected
 
-//         /* 
-//                     Promise()
-//                     /      \
-//                 resolve()  reject()
-//                     |        |
-//                 then()     catch()           -> call back functions
-//         */
+        /* 
+                    Promise()
+                    /      \
+                resolve()  reject()
+                    |        |
+                then()     catch()           -> call back functions
+        */
 
-//         var complete = true;
-//         var prom = new Promise(function(resolve, reject){
-//             if(complete){
-//                 resolve("Successful");
-//             }else{
-//                 reject("Failed");
-//             }
-//         });
-//         console.log(prom);                      //Promise {<fulfilled>: 'Successful'}
+        var complete = true;
+        var prom = new Promise(function(resolve, reject){
+            if(complete){
+                resolve("Successful");
+            }else{
+                reject("Failed");
+            }
+        });
+        console.log(prom);                      //Promise {<fulfilled>: 'Successful'}
 
-//         //in functions
-//         function promi(complete){
-//             return new Promise(function(resolve, reject){
-//                 if(complete){
-//                     resolve("Successful");
-//                 }else{
-//                     reject("Failed");
-//                 }
-//             })
-//         }
-//         console.log(promi(true));              //Promise {<fulfilled>: 'Successful'}
+        //in functions
+        function promi(complete){
+            return new Promise(function(resolve, reject){
+                if(complete){
+                    resolve("Successful");
+                }else{
+                    reject("Failed");
+                }
+            })
+        }
+        console.log(promi(true));              //Promise {<fulfilled>: 'Successful'}
 
-//         //using then or catch and pending state(using set timeout)
-//         function promi(complete){
-//             return new Promise(function(resolve, reject){
-//                 console.log("Pending State, Data is Fetching")
-//                 setTimeout(() => {
-//                     if(complete){
-//                         resolve("Successful");
-//                     }else{
-//                         reject("I am Failed");
-//                     }
-//                 }, 2000);
-//             })
-//         }
-//         var onfulfillment = (result) => {
-//             console.log(result);
-//         }
-//         var onRejection = (error) => {
-//             console.log(error);
-//         }
+        //using then or catch and pending state(using set timeout)
+        function promi(complete){
+            return new Promise(function(resolve, reject){
+                console.log("Pending State, Data is Fetching")
+                setTimeout(() => {
+                    if(complete){
+                        resolve("Successful");
+                    }else{
+                        reject("I am Failed");
+                    }
+                }, 2000);
+            })
+        }
+        var onfulfillment = (result) => {
+            console.log(result);
+        }
+        var onRejection = (error) => {
+            console.log(error);
+        }
 
-//         promi(false).then(onfulfillment).catch(onRejection);       //Pending State, Data is Fetching, Successful  (OR)     //Pending State, Data is Fetching, Failed
+        promi(false).then(onfulfillment).catch(onRejection);       //Pending State, Data is Fetching, Successful  (OR)     //Pending State, Data is Fetching, Failed
         
-//         //alternative way
-//         function promi(complete){
-//             return new Promise(function(resolve, reject){
-//                 console.log("Pending State, Data is Fetching")
-//                 setTimeout(() => {
-//                     if(complete){
-//                         resolve("I am Successful");
-//                     }else{
-//                         reject("I am Failed");
-//                     }
-//                 }, 2000);
-//             })
-//         }
+        //alternative way
+        function promi(complete){
+            return new Promise(function(resolve, reject){
+                console.log("Pending State, Data is Fetching")
+                setTimeout(() => {
+                    if(complete){
+                        resolve("I am Successful");
+                    }else{
+                        reject("I am Failed");
+                    }
+                }, 2000);
+            })
+        }
 
-//         promi(true).then((result) => {
-//             console.log(result);                  //Pending State, Data is Fetching, I am Successful 
-//         }).catch((error) => {
-//             console.log(error);                   //Pending State, Data is Fetching, I am failed
-//         });           
+        promi(true).then((result) => {
+            console.log(result);                  //Pending State, Data is Fetching, I am Successful 
+        }).catch((error) => {
+            console.log(error);                   //Pending State, Data is Fetching, I am failed
+        });           
         
-//         //another example (division)
-//         function proms(a, b){
-//             return new Promise(function(resolve, reject){
-//                 console.log("Calculating......")
-//                 var c = a / b;
-//                 setTimeout(() => {
-//                     if(a, b){
-//                         resolve(`answer : ${c}`);
-//                     }else{
-//                         reject(`Fail to Calculate`);
-//                     }
-//                 }, 2000);
-//             })
-//         }
+        //another example (division)
+        function proms(a, b){
+            return new Promise(function(resolve, reject){
+                console.log("Calculating......")
+                var c = a / b;
+                setTimeout(() => {
+                    if(a, b){
+                        resolve(`answer : ${c}`);
+                    }else{
+                        reject(`Fail to Calculate`);
+                    }
+                }, 2000);
+            })
+        }
 
-//         proms(10, 0).then((result) => {                     //Calculating....., answer 5
-//             console.log(result);
-//         }).catch((error) => {
-//             console.log(error);                              //if(denom - 0) Fail to Calculate
-//         });
+        proms(10, 0).then((result) => {                     //Calculating....., answer 5
+            console.log(result);
+        }).catch((error) => {
+            console.log(error);                              //if(denom - 0) Fail to Calculate
+        });
 
 
-//         //PROMISE.ALL()-------------------------------------------------------------------------------
+        //PROMISE.ALL()-------------------------------------------------------------------------------
 
-//         /*
-//             Promise()   Promise()   Promise()
-//                 \          |         /
-//                    \       |       /
-//                      Promise().all()
-//                         /      \
-//                     resolve()  reject()
-//  //if all resolved    |        |             //if any one is fails
-//                     then()     catch()  
+        /*
+            Promise()   Promise()   Promise()
+                \          |         /
+                   \       |       /
+                     Promise().all()
+                        /      \
+                    resolve()  reject()
+ //if all resolved    |        |             //if any one is fails
+                    then()     catch()  
             
-//         */
+        */
 
-//         var p1 = new Promise((resolve, reject)=>{
-//             setTimeout(() => {
-//                 console.log("First Promise resolved");
-//                 resolve(10);
-//             }, 1000);
-//         })
-//         var p2 = new Promise((resolve, reject)=>{
-//             setTimeout(() => {
-//                 console.log("Second Promise resolved");
-//                 resolve(20);
-//             }, 2000);
-//         })
-//         var p3 = new Promise((resolve, reject)=>{
-//             setTimeout(() => {
-//                 console.log("Third Promise resolved");
-//                 resolve(30);
-//             }, 3000);
-//         })
+        var p1 = new Promise((resolve, reject)=>{
+            setTimeout(() => {
+                console.log("First Promise resolved");
+                resolve(10);
+            }, 1000);
+        })
+        var p2 = new Promise((resolve, reject)=>{
+            setTimeout(() => {
+                console.log("Second Promise resolved");
+                resolve(20);
+            }, 2000);
+        })
+        var p3 = new Promise((resolve, reject)=>{
+            setTimeout(() => {
+                console.log("Third Promise resolved");
+                resolve(30);
+            }, 3000);
+        })
 
-//         Promise.all([p1, p2, p3]).then((result)=>{
-//             console.log(`Result : ${result}`);
-//         }).catch((error)=>{
-//             console.log(`Error : ${error}`);
-//         });
+        Promise.all([p1, p2, p3]).then((result)=>{
+            console.log(`Result : ${result}`);
+        }).catch((error)=>{
+            console.log(`Error : ${error}`);
+        });
 
-//         /*
-//         output
-//         First Promise resolved (after 1 sec)
-//         Second Promise resolved (after 2 sec)
-//         Third Promise resolved (after 3 sec)
-//         Result: 10, 20, 30
-//         */
+        /*
+        output
+        First Promise resolved (after 1 sec)
+        Second Promise resolved (after 2 sec)
+        Third Promise resolved (after 3 sec)
+        Result: 10, 20, 30
+        */
 
-//         //another way of writing (concise)
-//         var promiseCall = function(returnData, message){
-//             return function(resolve, reject){
-//                 setTimeout(() => {
-//                     console.log(`The ${message} promise has resolved`);
-//                     resolve(returnData);
-//                 }, returnData * 100);
-//             }
-//         }
-//         var p1 = new Promise(promiseCall(10, "First call"));
-//         var p2 = new Promise(promiseCall(20, "Second call"));
-//         var p3 = new Promise(promiseCall(30, "Third call"));
+        //another way of writing (concise)
+        var promiseCall = function(returnData, message){
+            return function(resolve, reject){
+                setTimeout(() => {
+                    console.log(`The ${message} promise has resolved`);
+                    resolve(returnData);
+                }, returnData * 100);
+            }
+        }
+        var p1 = new Promise(promiseCall(10, "First call"));
+        var p2 = new Promise(promiseCall(20, "Second call"));
+        var p3 = new Promise(promiseCall(30, "Third call"));
 
-//         var total = 0;
-//         Promise.all([p1, p2, p3]).then((result)=>{
-//             for(let i in result){
-//                 total += result[i];
-//             }
-//             console.log(`Results : ${result}`);
-//             console.log(`Total : ${total}`);
-//         }).catch((error)=>{
-//             console.log(`Error : ${error}`);
-//         })
+        var total = 0;
+        Promise.all([p1, p2, p3]).then((result)=>{
+            for(let i in result){
+                total += result[i];
+            }
+            console.log(`Results : ${result}`);
+            console.log(`Total : ${total}`);
+        }).catch((error)=>{
+            console.log(`Error : ${error}`);
+        })
 
-//         /*output
-//         The First call promise has resolved (after 1 sec)
-//         The Third call promise has resolved (after 2 sec)
-//         The Second call promise has resolved (after 3 sec)
-//         Results : 10, 20, 30
-//         Total : 60
-//         */
-
-
-//         //AJAX--------------------------------------------------------------------------
-//         /*
-//         Asynchronous Javascript And XML
-//         It is a technique for creating fast and dynamic web pages
-//         Using XMLHttpRequest in 5 steps (readyState)
-//         0 -> request not initialized
-//         1 -> server connection established
-//         2 -> request received
-//         3 -> processing request
-//         4 -> request finished and response is ready
-
-//         Response in 2 ways
-//         Status           (200 - OK, 403 - Forbidden, 404 - Not Found)
-//         responseText or responseXML
-//         */
-
-//         //SEE AJAX FOLDER******************************
+        /*output
+        The First call promise has resolved (after 1 sec)
+        The Third call promise has resolved (after 2 sec)
+        The Second call promise has resolved (after 3 sec)
+        Results : 10, 20, 30
+        Total : 60
+        */
 
 
-//         //FETCH()---------------------------------------------------------------------------------------------------------------------------
-//         //alternative of AJAX (simple code)
+        //AJAX--------------------------------------------------------------------------
+        /*
+        Asynchronous Javascript And XML
+        It is a technique for creating fast and dynamic web pages
+        Using XMLHttpRequest in 5 steps (readyState)
+        0 -> request not initialized
+        1 -> server connection established
+        2 -> request received
+        3 -> processing request
+        4 -> request finished and response is ready
 
-//         //SEE FETCH FOLDER*****************************
+        Response in 2 ways
+        Status           (200 - OK, 403 - Forbidden, 404 - Not Found)
+        responseText or responseXML
+        */
 
-//         //ASYNC AND AWAIT-------------------------------------------------------------------------------
-//         /*
-//         async functions always return promise (resolve[then] or reject[catch])
-//         no need to write resolve and reject
-//         */
+        //SEE AJAX FOLDER******************************
+
+
+        //FETCH()---------------------------------------------------------------------------------------------------------------------------
+        //alternative of AJAX (simple code)
+
+        //SEE FETCH FOLDER*****************************
+
+        //ASYNC AND AWAIT-------------------------------------------------------------------------------
+        /*
+        async functions always return promise (resolve[then] or reject[catch])
+        no need to write resolve and reject
+        */
 
         //normal function
         function test(){
