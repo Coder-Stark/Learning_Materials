@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 const SearchBar = () => {
   const [data, setData] = useState([]);
@@ -12,16 +12,22 @@ const SearchBar = () => {
         const jsonData = await data.json();
         // console.log(jsonData);
         setData(jsonData.results);
+        console.log(jsonData.results);
+        console.log("Search Data String : " ,searchData);
     }else{
         setData([]);
     }
   }
   const handleInput = (e)=>{
-    // console.log(e.target.value);
     setInput(e.target.value);
-    getData(e.target.value);
   }
-  console.log(data); 
+  useEffect(()=>{
+    let timer = setTimeout(() => {
+                    getData(input);
+                }, 300);
+    return ()=>clearTimeout(timer);
+  },[input]);
+
   return (
     <>
       <h1>Search Bar Using Debouncing</h1>
