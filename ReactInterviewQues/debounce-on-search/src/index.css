@@ -1,0 +1,27 @@
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+h1{
+  text-align: center;
+}
+.searchBox{
+  display: flex;
+  justify-content: center;
+  margin: 30px;
+}
+.searchBox input{
+  width: 500px;
+  padding: 8px;
+  border: 2px solid black;
+}
+.datas{
+  display: flex;
+  justify-content: center;
+  margin: 2px;
+  flex-wrap: wrap;
+  gap: 11px;
+}
+.datas img{
+  width: 300px;
+  height: 300px;
+}
