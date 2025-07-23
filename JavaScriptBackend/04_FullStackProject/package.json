@@ -1,0 +1,19 @@
+{
+  "name": "04_fullstackproject",
+  "version": "1.0.0",
+  "description": "a full stack project",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon src/index.js"
+  },
+  "keywords": [
+    "javascript",
+    "backend"
+  ],
+  "author": "shivam kumar",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}
