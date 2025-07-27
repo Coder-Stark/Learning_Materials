@@ -2,7 +2,13 @@
 import dotenv from 'dotenv';
 import connectDB from './config/db.js';
 import {app} from "./app.js";
-dotenv.config();
+
+dotenv.config({path: './.env'});
+/*
+// Debug: Check if .env is loaded
+console.log("PORT from env:", process.env.PORT);
+console.log("MONGO_URI loaded:", process.env.MONGO_URI ? "Yes" : "No");
+*/
 
 const port = process.env.PORT || 8000 
 
