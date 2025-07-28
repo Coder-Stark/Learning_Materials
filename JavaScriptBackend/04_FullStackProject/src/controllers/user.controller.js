@@ -3,6 +3,10 @@ import {ApiError} from "../utils/ApiErrorUtil.js";
 import {User} from  "../models/user.model.js";
 import { uploadOnCloudinary } from "../utils/cloudinaryUtil.js";
 import { ApiResponse } from "../utils/ApiResponseUtil.js";
+import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 //register user
 const registerUser = asyncHandler(async(req, res)=>{
@@ -213,4 +217,47 @@ const logoutUser = asyncHandler(async (req, res)=>{
 })
 
 
-export {registerUser, loginUser, logoutUser};
+//refresh "access" token by using "refresh" token
+const refreshAccessToken = asyncHandler(async (req, res)=>{
+    const incomingRefreshToken = req.cookies.refreshToken || req.body.refreshToken
+
+    if(!incomingRefreshToken){
+        throw new ApiError(401, "Unauthorized request");
+    }
+
+    try {
+        const decodedToken = jwt.verify(incomingRefreshToken, process.env.REFRESH_TOKEN_SECRET);
+    
+        const user = await User.findById(decodedToken?._id)
+        if(!user){
+            throw new ApiError(401, "Invalid Refresh Token");
+        }
+    
+        if(incomingRefreshToken !== user?.refreshToken){
+            throw new ApiError(401, "Refresh Token is expired or used");
+        }
+    
+        const options = {
+            httpOnly: true,
+            secure: true
+        }
+    
+        const {accessToken, refreshToken: newRefreshToken} = await generateAccessAndRefreshTokens(user._id);
+    
+        return res.status(200)
+                .cookie("accessToken", accessToken, options)
+                .cookie("refreshToken", newRefreshToken, options)
+                .json(new ApiResponse(
+                    200,
+                    {
+                        accessToken,
+                        refreshToken: newRefreshToken
+                    },
+                    "Access Token refreshed Successfully"
+                ))
+    } catch (err) {
+        throw new ApiError(401, err?.message || "Invalid refresh Token")
+    }
+})
+
+export {registerUser, loginUser, logoutUser, refreshAccessToken};
