@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Async Project 1</h1>
+    <button id="stop">Stop</button>
+</body>
+<script>
+    setTimeout(() => {
+        console.log("Shivam");
+    }, 2000);
+
+    // another way of above 
+    const sayName = ()=>{
+        console.log("Shivam");
+    }
+    setTimeout(sayName, 2000);
+
+    //change text of heading
+    const changeTxt = ()=>{
+        document.querySelector('h1').innerHTML = "Project 1 of Async in Js";
+    }
+    
+    //clear timeout in between execution 
+    const stTime = setTimeout(changeTxt, 4000);
+    document.querySelector('#stop').addEventListener('click', ()=>{
+        clearTimeout(stTime);
+        console.log("STOPPED setTimeout")
+    })
+</script>
+</html>
