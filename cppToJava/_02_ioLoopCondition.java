@@ -16,6 +16,8 @@ public class _02_ioLoopCondition{
         // String s = scn.next();                                       //it will print string without spaces (first word)
         System.out.println("Your input string was : " + s);
 
+        scn.close();  // close the scanner to avoid resource leak
+
 
         //for , while, do-while, break, continue, if, else, if-else, switch
         //all are same like in c++

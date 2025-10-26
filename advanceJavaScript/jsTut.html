@@ -8,29 +8,29 @@
         var a = 1;
         var a = 2;                    //redeclaration allowed
         a = 3;                        //reassign allowed
-        console.log(a);
+        console.log(a);               //3
 
         let b = 1;
         // let b = 2;                 //redeclaration NOT allowed
         b = 3;                        //reassign allowed
-        console.log(b);
+        console.log(b);               //3
 
         const c = 1;
         // const c = 2;               //redeclaration NOT allowed
         // c = 3;                    //reassign NOT allowed
-        console.log(c);
+        console.log(c);               //1
 
 
         //TEMPLETE LATERALS (BACK TICK OPERATOR)---------------------
         function name(user){
             return `Hello ${user}`;
         }
-        console.log(name("shivam"));
+        console.log(name("shivam"));       //Hello shivam
 
 
         //ARROW FUNCTIONS---------------------------------------------
         let newName = (user) => `Hello ${user}`;
-        console.log(newName("Kumar"));
+        console.log(newName("Kumar"));     //Hello shivam
 
 
         //REST OPERATOR------------------------------------------------

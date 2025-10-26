@@ -168,7 +168,7 @@ console.log("Age : ", age);
 
 
 //hoisting concept with functions
-myFun();                            //second (in functions initialize wiht body of function [not undefined])
+myFun();                            //second (in functions initialize with body of function [not undefined])
 
 var myFun = function(){
     console.log("First");           

@@ -1,4 +1,3 @@
-import java.util.Scanner;
 /*
  Data types
 8 Inbuilt data types
