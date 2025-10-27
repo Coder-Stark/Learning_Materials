@@ -7,7 +7,7 @@ function sayMyName(){
     console.log("M");
 }
 
-sayMyName;                  //refrence
+sayMyName;                  //reference
 sayMyName();                //execution
 
 
@@ -20,7 +20,7 @@ function addTwoNumbers1(num1, num2){
     console.log(num1 + num2);
 }
 const result1 = addTwoNumbers1(3, 5);                 //8      (3, 5)-> arguments
-console.log("incorrect esult : ", result1);           //incorrect result: undefined
+console.log("incorrect result : ", result1);           //incorrect result: undefined
 
 function addTwoNumbers2(num1, num2){                
     return (num1 + num2);
@@ -51,7 +51,7 @@ function calculateCartPrice2(val1, val2, ...nums){
 }
 console.log(calculateCartPrice2(200, 400, 500, 300, 700));   //[ 500, 300, 700 ]
 
-//pass object in functino
+//pass object in function
 const user = {
     username: "Shivam",
     price: 200

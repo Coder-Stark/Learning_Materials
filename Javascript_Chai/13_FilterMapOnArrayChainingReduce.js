@@ -15,6 +15,8 @@ myNums.forEach((num)=>{
     }
 })
 console.log(newNums2);   
+
+
 const bookData = [
     {title: "Book 1", genre: "history", publish: 2000},
     {title: "Book 2", genre: "polscience", publish: 2001},
