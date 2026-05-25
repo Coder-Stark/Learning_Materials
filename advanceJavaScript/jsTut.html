@@ -4,7 +4,12 @@
     <title>Advance JavaScript Tutorials</title>
     <script>
 
+        //Advance Javascript Introduction----------------------------------------
+        console.log("Tutorial - 01 -> Advance Javascript intro");
+
         //VAR LET CONST----------------------------------------
+        console.log("Tutorial - 02 -> Var, Let and Const");
+
         var a = 1;
         var a = 2;                    //redeclaration allowed
         a = 3;                        //reassign allowed
@@ -22,6 +27,8 @@
 
 
         //TEMPLETE LATERALS (BACK TICK OPERATOR)---------------------
+        console.log("Tutorial - 03 -> Template Strings");
+
         function name(user){
             return `Hello ${user}`;
         }
@@ -29,11 +36,15 @@
 
 
         //ARROW FUNCTIONS---------------------------------------------
+        console.log("Tutorial - 04 -> Arrow Functions");
+
         let newName = (user) => `Hello ${user}`;
         console.log(newName("Kumar"));     //Hello shivam
 
 
         //REST OPERATOR------------------------------------------------
+        console.log("Tutorial - 05 -> Rest Operator");
+
         function sum(name, course, ...args){
             console.log(arguments);
 
@@ -48,6 +59,8 @@
         
         
         //SPREAD OPERATOR------------------------------------------------
+        console.log("Tutorial - 06 -> Spread Operator");
+
         function sum2(name, course, ...args){
             console.log(arguments);
             let sum2 = 0;
@@ -95,6 +108,8 @@
 
 
         //OBJECT LITERALS------------------------------------------------
+        console.log("Tutorial - 07 -> Object Literals");
+
         //old version
         var name = "Rajbhar";
         var course = "college";
@@ -169,6 +184,8 @@
 
 
         //DESTRUCTURING ARRAY---------------------------------------------------
+        console.log("Tutorial - 08 -> Destructuring Array");
+
         var user = ["Shivam Kumar", 23, ["Male", "1lac"]];
 
         //old version                             //create new var each time
@@ -200,6 +217,8 @@
 
 
         //DESTRUCTURING OBJECTS-----------------------------------------------------------------
+        console.log("Tutorial - 09 -> Destructuring Object");
+
         var user = {
             name: "Vikas",
             age: 23,
@@ -213,6 +232,8 @@
         
 
         //OOPS INTRODUCTION----------------------------------------------------------------------
+        console.log("Tutorial - 10 -> OOP Intro");
+
         // class -> blueprint              (map of home)
         // objects-> instance of class     (homes made using maps)
         //properties-> let a, b;
@@ -279,6 +300,8 @@
                      
 
         //INHERITANCE-----------------------------------------------------------------------
+        console.log("Tutorial - 11 -> Class Inheritance");
+
         class employee{
             constructor(name){
                 console.log(`Constructor of Employee calls ${name}`)
@@ -349,6 +372,8 @@
 
 
         //MODULES-------------------------------------------------------------------------------------
+        console.log("Tutorial - 12 -> Modules");
+
         /*
         export file using export
         import file using import
@@ -356,15 +381,17 @@
         //SEE MODULE FOLDER******************
 
         //PROMISE--------------------------------------------------------------
+        
         //promise states - Pending, Fulfilled, Rejected
-
+        
         /* 
                     Promise()
                     /      \
                 resolve()  reject()
                     |        |
-                then()     catch()           -> call back functions
+                    then()     catch()           -> call back functions
         */
+        console.log("Tutorial - 13 -> Promise");
 
         var complete = true;
         var prom = new Promise(function(resolve, reject){
@@ -453,6 +480,7 @@
 
 
         //PROMISE.ALL()-------------------------------------------------------------------------------
+        console.log("Tutorial - 14 -> Promise.all");
 
         /*
             Promise()   Promise()   Promise()
@@ -549,12 +577,17 @@
         */
 
         //SEE AJAX FOLDER******************************
+        console.log("Tutorial - 15 -> Ajax");
+        console.log("See Ajax Folder")
 
 
         //FETCH()---------------------------------------------------------------------------------------------------------------------------
         //alternative of AJAX (simple code)
 
         //SEE FETCH FOLDER*****************************
+        console.log("Tutorial - 16 -> Fetch API");
+        consol.log("See Fetch Folder");
+
 
         //ASYNC AND AWAIT-------------------------------------------------------------------------------
         /*
@@ -618,9 +651,12 @@
         //print = 1.. 2.. 3.. 5.. 4..
 
         //SEE ASYNC_AWAIT FOLDER****************************************
+        console.log("Tutorial - 19 -> Async and Await");
+        console.log("See Async Await Folder");
 
 
         //SYMBOL(new DataType)----------------------------------------------------------------------------------------------
+        console.log("Tutorial - 18 -> Symbols");
         //use to use unique values
         let id = Symbol();
         console.log(id);                    //Symbol()
@@ -665,6 +701,7 @@
 
 
         //ITERATORS---------------------------------------------------------------------------------------------------
+        console.log("Tutorial - 19 -> Iterators");
         //general
         let numbers = [10, 20, 30];
         console.log(numbers);                   //(3) [10, 20, 30]
@@ -710,6 +747,8 @@
 
         //GENERATORS----------------------------------------------------------------------------
         //to control iterations or work in a function
+        console.log("Tutorial - 20 -> Generators");
+
         //normal function
         function generate(){
             console.log("First");
@@ -751,6 +790,7 @@
         
 
         //STRICT MODE-----------------------------------------------------------------------------------------
+        console.log("Tutorial - 21 -> Strict Mode");
         //use to not avoid basic syntax errors like (without declaration use - a = 10; console.log(a))
         // "use strict";                  //at the top of codes (<script>"use strict" --- </scrip>) or anywhere above codes
         l = 10;
@@ -770,6 +810,7 @@
 
 
         //ERROR HANDLING-------------------------------------------------
+        console.log("Tutorial - 22 -> Error Handling");
         try{
             console.log("Start of Try");               //Start of Try
             blbla;
@@ -826,8 +867,8 @@
         test.html:58 Error : blbla is not defined
         test.html:59 Error : ReferenceError: blbla is not defined at test.html:54:13
         */
-
-        /*
+       
+       /*
         Types of Error in JavaScript
         1. EvalError       ->    When We use Eval functions
         2. RangeError      ->    type error where we use range
@@ -838,13 +879,13 @@
         7. AggregateError  ->    promise.all() here aggregate errors
         */
 
-        //General use of try catch in api fetching data loading
-        try{
+       //General use of try catch in api fetching data loading
+       try{
             let json = `{
                 "name": "Shivam Kumar",
                 "age" : 23
-            }`;
-            let user = JSON.parse(json);       //converts json data format to javascript object (fetch data from server to javascript objects)
+                }`;
+                let user = JSON.parse(json);       //converts json data format to javascript object (fetch data from server to javascript objects)
             // let user = JSON.stringify(json);       //converts javascript objects data format to json format (send javascript objects data to server)
             console.log(user.name);                   //Shivam Kumar
             console.log(user.age);                    //23
@@ -868,7 +909,7 @@
             console.log(`Error : ${err}`);
         }
         //output : Error : Error: Incomplete Data
-
+        
         //use finally
         try{
             let json = `{
@@ -886,6 +927,66 @@
         }finally{
             console.log('Finally');              //Finally (work all time either error occur or not)
         }
+
+
+        //Web Storage (5 MB limit) have 2 types
+        // 1. local Storage        ->      Permanent  , shared across tabs
+        // 2. session Storage      ->      Until tab closes , can't shared across tabs
+
+        //LOCAL STORAGE-------------------------------------------------
+        console.log("Tutorial - 23 -> Local Storage");
+        
+        /*
+        Methods in Local Storage (5)
+        1. localStorage.setItem("key", "value");
+        2. localStorage.getItem("key");
+        3. localStorage.removeItem("key");
+        4. localStorage.clear();
+        5. localStorage.length
+
+        Use Cases
+        1. Dark/ligth theme
+        2. remember login ui
+        3. shopping cart
+        4. language preference
+        5. draft saving
+
+        Never store
+        1. password
+        2. bank details
+        3. sensitive tokens
+        */
+
+        //SEE LOCALSTORAGE FOLDER******************************
+        console.log("See LocalStorage Folder")
+        
+        //SESSION STORAGE-------------------------------------------------
+        console.log("Tutorial - 24 -> SESSION Storage");
+        
+        /*
+        Methods in Session Storage (4)
+        1. localStorage.setItem("key", "value");
+        2. localStorage.getItem("key");
+        3. localStorage.removeItem("key");
+        4. localStorage.clear();
+
+        Use Cases
+        1. Multi-Step Forms
+        2. OTP-Verification Flow
+        3. One-Time Messages
+        4. Temporary Filters/Search
+        5. Prevent Form Data Loss
+
+        Never store
+        1. password
+        2. bank details
+        3. sensitive tokens
+        */
+
+        //SEE SESSIONSTORAGE FOLDER******************************
+        console.log("See SessionStorage Folder")
+        
+        
     </script>
 </head>
 <body>

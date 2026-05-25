@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+    .dark{
+      background: black;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <h2></h2>
+  
+  <button onclick="removeFunction()">Remove LocalStorage</button>
+  <script>
+    let user = localStorage.getItem("username") || "";
+
+    document.querySelector("h2").innerText = user;
+
+    let currentTheme = localStorage.getItem("theme");
+    if(currentTheme === "dark"){
+      document.body.classList.add("dark");
+    }
+
+    function removeFunction(){
+      localStorage.removeItem("username");
+      localStorage.clear();                  //remove all key
+    }
+
+    console.log(localStorage.length);                         //2
+    console.log(localStorage);                                //Storage {username: 'shivam', theme: 'dark', length: 2}
+
+    for(let i = 0; i < localStorage.length ; i++){
+      let key = localStorage.key(i);
+      console.log(`${key} : ${localStorage.getItem(key)}`);   //them: dark, username: shivam
+    }
+    
+    //same as above
+    let keys = Object.keys(localStorage);
+    for(let key of keys){
+      console.log(`${key} : ${localStorage.getItem(key)}`);   //them: dark, username: shivam
+    }
+
+    //wrong way of storing object in localstorage
+    localStorage.newUser = {name: "john", age: "18"}                     //newUser: [object object]
+    console.log(localStorage.newUser);                        //[object object]
+
+    //right way of storing object in localstorage
+    localStorage.newUser2 = JSON.stringify({name: "john2", age: 18});  
+    console.log(localStorage.newUser2);                       //{"name":"john2", "age": 18}
+    
+    //for accessing
+    let newUser3 = JSON.parse(localStorage.newUser2);
+    console.log(newUser3.name);                               //john2
+    console.log(newUser3.age);                                //18
+
+  </script>
+</body>
+</html>
